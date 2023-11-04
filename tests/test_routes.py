@@ -188,5 +188,6 @@ class TestAccountService(TestCase):
         self.assertEqual(response.json, [])
 
     def test_method_not_allowed_handler(self):
+        """It should return error 405 when incorrect method used"""
         response = self.client.delete(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)

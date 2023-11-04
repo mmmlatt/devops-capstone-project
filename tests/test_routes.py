@@ -161,3 +161,14 @@ class TestAccountService(TestCase):
         """It should return 404 when trying to update a non-existing account (ID=0)"""
         response = self.client.put(f"{BASE_URL}/0")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+    
+    def test_delete_an_account(self):
+        """It should delete an account"""
+        account = self._create_accounts(1)[0]
+        delete_response = self.client.delete(f"{BASE_URL}/{account.id}")
+        self.assertEqual(delete_response.status_code, status.HTTP_204_NO_CONTENT)
+    
+    def test_delete_an_account_invalid_data(self):
+        """It should return 404 when trying to delete a non-existing account (ID=0)"""
+        response = self.client.delete(f"{BASE_URL}/0")
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

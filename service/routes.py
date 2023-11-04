@@ -64,6 +64,7 @@ def create_accounts():
 # ... place you code here to LIST accounts ...
 @app.route("/accounts", methods=["GET"])
 def list_all_accounts():
+    """Lists all accounts"""
     app.logger.info("Request to list all accounts")
     accounts = Account.all()
     account_list = []
@@ -80,6 +81,7 @@ def list_all_accounts():
 # ... place you code here to READ an account ...
 @app.route("/accounts/<int:id>", methods=["GET"])
 def read_account(id):
+    """Reads a specified account by ID"""
     app.logger.info(f"Request to read an Account with id: {id}")
     account = Account.find(id)
     if not account:
@@ -93,6 +95,7 @@ def read_account(id):
 # ... place you code here to UPDATE an account ...
 @app.route("/accounts/<int:id>", methods=["PUT"])
 def update_account(id):
+    """Updates an account based on ID"""
     app.logger.info(f"Request to update account with id {id}")
     account = Account.find(id)    
     if not account:
@@ -107,6 +110,7 @@ def update_account(id):
 # ... place you code here to DELETE an account ...
 @app.route("/accounts/<int:id>", methods=["DELETE"])
 def delete_account(id):
+    """Deletes an account based on ID"""
     app.logger.info(f"Request to delete an account with id {id}")
     account = Account.find(id)    
     if not account:

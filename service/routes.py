@@ -1,6 +1,5 @@
 """
 Account Service
-
 This microservice handles the lifecycle of Accounts
 """
 # pylint: disable=unused-import
@@ -57,6 +56,7 @@ def create_accounts():
         jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
     )
 
+
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
@@ -85,24 +85,28 @@ def read_account(id):
     app.logger.info(f"Request to read an Account with id: {id}")
     account = Account.find(id)
     if not account:
-        abort(status.HTTP_404_NOT_FOUND, f"Account with id {id} could not be found.") 
+        abort(status.HTTP_404_NOT_FOUND, f"Account with id {id} could not be found.")
     return(account.serialize(), status.HTTP_200_OK)
+
 
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
 
 # ... place you code here to UPDATE an account ...
+
 @app.route("/accounts/<int:id>", methods=["PUT"])
 def update_account(id):
     """Updates an account by ID"""
     app.logger.info(f"Request to update account with id {id}")
-    account = Account.find(id)    
+    account = Account.find(id)
     if not account:
         abort(status.HTTP_404_NOT_FOUND, f"Account with id {id} could not be found.")
     account.deserialize(request.get_json())
     account.update()
-    return(account.serialize(), status.HTTP_200_OK)    
+    return(account.serialize(), status.HTTP_200_OK)
+
+
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
@@ -112,11 +116,12 @@ def update_account(id):
 def delete_account(id):
     """Deletes an account by ID"""
     app.logger.info(f"Request to delete an account with id {id}")
-    account = Account.find(id)    
+    account = Account.find(id)
     if not account:
         abort(status.HTTP_404_NOT_FOUND, f"Account with id {id} could not be found.")
     account.delete()
     return("", status.HTTP_204_NO_CONTENT)
+
 
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S
